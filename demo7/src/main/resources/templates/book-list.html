@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background-color: #333;
+            padding: 10px;
+            color: white;
+            text-align: center;
+        }
+        nav {
+            background-color: #666;
+            padding: 10px;
+            text-align: center;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        input {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h2>Book List</h2>
+</header>
+<nav>
+    <a th:href="@{/users}">User List</a>
+    <a th:href="@{/users/create}">Create User</a>
+    <a th:href="@{/books}">Book List</a>
+    <a th:href="@{/books/create}">Create Book</a>
+    <a th:href="@{/employees}">Employee List</a>
+    <a th:href="@{/employees/create}">Create Employee</a>
+    <a th:href="@{/products}">Product List</a>
+    <a th:href="@{/products/create}">Create Product</a>
+    <a th:href="@{/orders}">Order List</a>
+    <a th:href="@{/orders/create}">Create Order</a>
+</nav>
+
+
+<form th:action="@{/books/search}" method="get">
+    <label for="search">Search by Title or Author:</label>
+    <input type="text" id="search" name="search" placeholder="Enter search term">
+    <input type="submit" value="Search">
+</form>
+
+
+<table>
+    <thead>
+    <tr>
+        <th>Book ID</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Publication Year</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the list of books and display them -->
+    <tr th:each="book : ${books}">
+        <td th:text="${book.book_id}"></td>
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.genre}"></td>
+        <td th:text="${book.publication_year}"></td>
+
+        <td>
+            <a th:href="@{/books/update/{id}(id=${book.book_id})}">Update</a>
+            <a th:href="@{/books/delete/{id}(id=${book.book_id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

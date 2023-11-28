@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Book</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background-color: #333;
+            padding: 10px;
+            color: white;
+            text-align: center;
+        }
+        form {
+            width: 50%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h2>Update Employee</h2>
+</header>
+
+<nav>
+    <a th:href="@{/employees}">Employee List</a>
+</nav>
+
+<form th:action="@{/employees/update}" th:object="${employee}" method="post">
+    <input type="hidden" th:field="*{employee_id}">
+
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" th:field="*{first_name}" required><br>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" th:field="*{last_name}" required><br>
+
+    <label for="position">Position:</label>
+    <input type="text" id="position" th:field="*{position}" required><br>
+
+    <label for="hireDate">Hire Date:</label>
+    <input type="date" id="hireDate" th:field="*{hire_date}" required><br>
+
+    <button type="submit">Update Employee</button>
+</form>
+
+</body>
+</html>

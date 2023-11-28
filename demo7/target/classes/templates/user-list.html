@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background-color: #333;
+            padding: 10px;
+            color: white;
+            text-align: center;
+        }
+        nav {
+            background-color: #666;
+            padding: 10px;
+            text-align: center;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        a {
+            color: #333;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h2>User List</h2>
+</header>
+
+<nav>
+    <a th:href="@{/users}">User List</a>
+    <a th:href="@{/users/create}">Create User</a>
+    <a th:href="@{/books}">Book List</a>
+    <a th:href="@{/books/create}">Create Book</a>
+    <a th:href="@{/employees}">Employee List</a>
+    <a th:href="@{/employees/create}">Create Employee</a>
+    <a th:href="@{/products}">Product List</a>
+    <a th:href="@{/products/create}">Create Product</a>
+    <a th:href="@{/orders}">Order List</a>
+    <a th:href="@{/orders/create}">Create Order</a>
+</nav>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>User ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Password Hash</th>
+        <th>Registration Date</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the list of users and display them -->
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.password_hash}"></td>
+        <td th:text="${#dates.format(user.registration_date, 'yyyy-MM-dd')}"></td>
+        <td>
+            <a th:href="@{'/users/update/' + ${user.id}}">Update</a>
+            <a th:href="@{'/users/delete/' + ${user.id}}">Delete</a>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+</body>
+</html>

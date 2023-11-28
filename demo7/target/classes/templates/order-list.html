@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Order List</title>
+</head>
+<body>
+
+<header>
+    <h2>Order List</h2>
+</header>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Order ID</th>
+        <th>Customer</th>
+        <th>Order Date</th>
+        <th>Total Amount</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the list of orders and display them -->
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.orderId}"></td>
+        <td th:text="${order.customer != null ? order.customer.username : ''}"></td>
+        <td th:text="${order.orderDate != null ? #dates.format(order.orderDate, 'yyyy-MM-dd') : ''}"></td>
+        <td th:text="${order.totalAmount != null ? order.totalAmount : ''}"></td>
+        <td>
+            <a th:href="@{'/orders/update/' + ${order.orderId}}">Update</a>
+            |
+            <a th:href="@{'/orders/delete/' + ${order.orderId}}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
